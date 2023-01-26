@@ -2,29 +2,22 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { DataSource } from 'typeorm';
+import { connectDatabase } from './connect.database';
 import dotenv from 'dotenv';
 dotenv.config();
 
 
-export const initApp = () => {
+export const initApp = async () => {
   
-  const myDataSource = new DataSource({
-    type: "mysql",
-    host: process.env.DB_HOST,
-    port: +process.env.DB_PORT,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-  });
-  myDataSource.initialize()
-  .then(() => {
-    console.log('Database Connected ✅');
-  })
-  .catch((error) => {
-    console.log(error);
-    process.exit(1);
-  });
+  
+  await connectDatabase()
+          .then((info) => {
+               console.log("Database connected successfully");
+          })
+          .catch((error) => {
+               console.log(error.message);
+               process.exit(1);
+          });
 
   const app = express();
 
