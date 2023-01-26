@@ -1,6 +1,10 @@
+
 const uid = "tedsoftj1123";
 const pw = "asdf";
 
+const promiseChain = new Promise((resolve, reject) =>  {
+    setTimeout(resolve, 1000);
+});
 
 const login = new Promise((resolve, reject) => {
     if(uid === "tedsoftj1123") {
@@ -16,9 +20,11 @@ const login = new Promise((resolve, reject) => {
 });
 
 login
-.then(user => {
-    console.log(`status is ${user.status} you have ${user.authority} authoirty`);
-})
-.catch(console.log)
+    .then(user => {
+        promiseChain()
+        .then(console.log(`status is ${user.status} you have ${user.authority} authoirty`))
+        .catch(console.log)
+    })
+    .catch(console.log)
 
 
