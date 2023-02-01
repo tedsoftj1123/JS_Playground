@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
-import { User } from '../domain/User';
+import { User } from '../domain/entity/user.entity';
 dotenv.config
 
 export const connectDatabase = () => {
@@ -14,7 +14,7 @@ export const connectDatabase = () => {
           synchronize: true,
           logging: true,
           entities: [
-               User
+               'src/domain/entity/*.entity{.ts,.js}'
           ]
      });
      return connection.initialize(); 
