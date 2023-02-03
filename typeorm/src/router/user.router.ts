@@ -1,10 +1,16 @@
 import { Router } from "express";
-import { queryUserList } from "../controller/user.controller";
+import { queryUserList, saveUser } from "../controller/user.controller";
 import { errorHandler } from "../middleware/globalErrorHandler";
 
 const router = Router();
 export const userRouter = (router: Router) => {
+
+     router.use("/users", router);
      
-     router.get("/users", errorHandler(queryUserList));
+
+     router
+     .route("/")
+     .get(errorHandler(queryUserList))
+     .post(errorHandler(saveUser))
      
 }

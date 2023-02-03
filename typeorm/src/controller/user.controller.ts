@@ -10,7 +10,8 @@ const queryUserList: BusinessLogic = async (req: Request, res: Response, next: N
 }
 
 const saveUser: BusinessLogic = async (req: Request, res: Response, next: NextFunction) => {
-
+     await userService.saveUser(req.body);
+     res.status(201);
 }
 
-export {queryUserList}
+export {queryUserList, saveUser}
