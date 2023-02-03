@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { userInfo } from "os";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Post } from "./post.entity";
 
 @Entity("user")
 export class User {
@@ -20,4 +22,7 @@ export class User {
 
      @Column({type: "integer"})
      age: number
+
+     @OneToMany(type => Post, (post) => post.user)
+     poasts: Post[]
 }
