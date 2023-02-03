@@ -1,7 +1,8 @@
+import 'reflect-metadata';
 import { DataSource } from "typeorm";
-import dotenv from 'dotenv';
-import { User } from "../domain/entity/user.entity";
-dotenv.config();
+import { Post } from '../domain/entity/post.entity';
+import { User } from '../domain/entity/user.entity';
+require('dotenv').config();
 
 export const connection = new DataSource({
      type: "mysql",
@@ -13,7 +14,6 @@ export const connection = new DataSource({
      synchronize: true,
      logging: true,
      entities: [
-          User
-          //'src/domain/entity/*.entity{.ts,.js}'
+          User, Post
      ]
 });
