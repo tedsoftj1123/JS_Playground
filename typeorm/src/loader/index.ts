@@ -40,7 +40,7 @@ export const initApp = async () => {
 
   app.use('/', mainRoute());
 
-  app.use((req, res, next) => {
+  app.use('*', (req, res, next) => {
      next(new Error('Not Found'));
   });
 
@@ -49,7 +49,7 @@ export const initApp = async () => {
      res.status(500)
      .json(
       {
-         error: err.message
+         error: err.name
       })
     });
 
