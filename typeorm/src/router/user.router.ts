@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { queryUserList, saveUser } from "../controller/user.controller";
+import { findUserByAccountId, queryUserList, saveUser } from "../controller/user.controller";
 import { errorHandler } from "../middleware/globalErrorHandler";
 
 const router = Router();
@@ -12,5 +12,7 @@ export const userRouter = (router: Router) => {
      .route("/")
      .get(errorHandler(queryUserList))
      .post(errorHandler(saveUser))
+
+     router.get("/:accountId", errorHandler(findUserByAccountId));
      
 }
