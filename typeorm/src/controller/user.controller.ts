@@ -20,6 +20,7 @@ const saveUser: BusinessLogic = async (req: Request, res: Response, next: NextFu
 
 const findUserByAccountId: BusinessLogic = async (req: Request, res: Response, next: NextFunction) => {
      const user = await userService.findByAccountId(req.params.accountId);
+     res.status(200).json(user);
 }
 
 export {queryUserList, saveUser, findUserByAccountId}
