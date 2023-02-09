@@ -1,16 +1,21 @@
 import { connection } from "../../loader/db.connection";
 import { User } from "../entity/user.entity";
 
+const entity: string = "user";
 const baseRepositroy = connection.getRepository(User);
-
 export const userRepository = baseRepositroy.extend({
-     findByAccountId(accountId: string) {
-         return this.createQueryBuilder("user")
-             .where("user.accountId = :acccountId", { accountId })
-             .getOne()
-     },
-     findAll() {
-        return this.createQueryBuilder("user")
-            .getMany();
-     }
+
+    existsByAccountId(accountId: string): Promise<boolean> {
+        return baseRepositroy.exist(
+            {"where": {"accountId": accountId}}
+        )
+    },
+    findByAccountId(accountId: string): Promise<User> {
+        return this.createQueryBuilder(entity)
+        .where("accountId = :accountId", {accountId})
+        .getOne();
+    },
+    findAll(): Promise<User[]> {
+        return baseRepositroy.find()    
+    }
  });
