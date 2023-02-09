@@ -11,7 +11,15 @@ const queryUserList: BusinessLogic = async (req: Request, res: Response, next: N
 
 const saveUser: BusinessLogic = async (req: Request, res: Response, next: NextFunction) => {
      await userService.saveUser(req.body);
-     res.status(201);
+     res.status(201).json(
+          {
+               message: "User created successfully"
+          }
+     );
 }
 
-export {queryUserList, saveUser}
+const findUserByAccountId: BusinessLogic = async (req: Request, res: Response, next: NextFunction) => {
+     const user = await userService.findByAccountId(req.params.accountId);
+}
+
+export {queryUserList, saveUser, findUserByAccountId}
