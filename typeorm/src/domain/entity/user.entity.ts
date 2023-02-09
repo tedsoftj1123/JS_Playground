@@ -1,4 +1,3 @@
-import { userInfo } from "os";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Post } from "./post.entity";
 
@@ -14,10 +13,10 @@ export class User {
      @Column({type: "varchar", length:"10"})
      name: string
 
-     @Column({type: "varchar", length:"10"})
+     @Column({type: "varchar", length:"60"})
      password: string
 
-     @Column({type: "varchar", length:"10"})
+     @Column({type: "varchar", length:"30"})
      email: string
 
      @Column({type: "integer"})
