@@ -2,16 +2,16 @@ import express, { Request, Response } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { connectDatabase } from './connect.database';
 import dotenv from 'dotenv';
 import { mainRoute } from '../router/main.router';
+import { connection } from './db.connection';
 dotenv.config();
 
 
 export const initApp = async () => {
   
   
-  await connectDatabase()
+  await connection.initialize()
           .then((info) => {
                console.log("Database connected successfully");
           })
