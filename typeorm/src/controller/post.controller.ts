@@ -8,5 +8,13 @@ const queryPostListByUserId: BusinessLogic = async (req: Request, res: Response,
      res.status(200).json(posts)
 }
 
+const createNotice: BusinessLogic = async (req: Request, res: Response, next: NextFunction) => {
+     const post = await postService.savePost(req.body, +req.params.userId);
+     res.status(201).json(
+          {
+               "id": post.id
+          }
+     );
+}
 
-export {queryPostListByUserId}
+export {queryPostListByUserId, createNotice}
