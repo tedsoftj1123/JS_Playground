@@ -13,7 +13,5 @@ export const connection = new DataSource({
      database: process.env.DB_NAME,
      synchronize: true,
      logging: true,
-     entities: [
-          "../domain/entity/*.ts"
-     ]
+     entities: [User, Post]
 });

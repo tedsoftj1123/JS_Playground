@@ -1,8 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entity";
 
 @Entity("post")
-export class Post {
+export class Post extends BaseEntity{
      @PrimaryGeneratedColumn()
      id: number
 
@@ -12,8 +12,8 @@ export class Post {
      @Column({type : "varchar"})
      content: string
 
-     @ManyToOne(() => User)
+     @ManyToOne(() => User, (user) => user.poasts)
      @JoinColumn({name: "user_id"})
-     user: Promise<User>
+     user: User
 
 }
