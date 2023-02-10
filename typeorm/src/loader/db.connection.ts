@@ -14,6 +14,6 @@ export const connection = new DataSource({
      synchronize: true,
      logging: true,
      entities: [
-          User, Post
+          "../domain/entity/*.ts"
      ]
 });
