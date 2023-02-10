@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon dist/app.js",
-    "build" : "npx tsc"
+    "build": "npx tsc"
   },
   "author": "tedsoftj11123",
   "license": "MIT",
@@ -17,7 +17,8 @@
     "express": "^4.18.2",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
-    "typeorm": "^0.3.11"
+    "typeorm": "^0.3.11",
+    "typeorm-naming-strategies": "^4.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",

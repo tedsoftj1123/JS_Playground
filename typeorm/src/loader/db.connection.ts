@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { DataSource } from "typeorm";
 import { Post } from '../domain/entity/post.entity';
 import { User } from '../domain/entity/user.entity';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 require('dotenv').config();
 
 export const connection = new DataSource({
@@ -13,5 +14,6 @@ export const connection = new DataSource({
      database: process.env.DB_NAME,
      synchronize: true,
      logging: true,
+     namingStrategy: new SnakeNamingStrategy(),
      entities: [User, Post]
 });
