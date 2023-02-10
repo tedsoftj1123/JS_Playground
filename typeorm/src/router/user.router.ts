@@ -3,15 +3,13 @@ import { findUserByAccountId, queryUserList, saveUser } from "../controller/user
 import { errorHandler } from "../middleware/globalErrorHandler";
 
 const router = Router();
-export const userRouter = (router: Router) => {
+export const userRouter = (app: Router) => {
 
-     router.use("/users", router);
+     app.use("/users", router);
      
 
-     router
-     .route("/")
-     .get(errorHandler(queryUserList))
-     .post(errorHandler(saveUser))
+     router.get("/", errorHandler(queryUserList))
+     router.post("/", errorHandler(saveUser))
 
      router.get("/:accountId", errorHandler(findUserByAccountId));
      

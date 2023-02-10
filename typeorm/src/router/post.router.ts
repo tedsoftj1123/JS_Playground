@@ -3,11 +3,11 @@ import { createNotice, queryPostListByUserId } from "../controller/post.controll
 import { errorHandler } from "../middleware/globalErrorHandler";
 
 const router = Router();
-export const postRouter = (router: Router) => {
+export const postRouter = (app: Router) => {
 
-     router.use('/posts', router);
+     app.use('/posts', router);
 
-     router.get('/:userId', errorHandler(queryPostListByUserId));
+     router.get("/:userId", errorHandler(queryPostListByUserId));
 
      router.post('/:userId', errorHandler(createNotice));
 
