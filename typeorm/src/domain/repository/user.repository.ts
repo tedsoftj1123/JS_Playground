@@ -7,12 +7,14 @@ export const userRepository = baseRepositroy.extend({
 
     existsByAccountId(accountId: string): Promise<boolean> {
         return baseRepositroy.exist(
-            {"where": {"accountId": accountId}}
+            {
+                where: { "accountId" : accountId }
+            }
         )
     },
     findByAccountId(accountId: string): Promise<User> {
         return this.createQueryBuilder(entity)
-        .where("accountId = :accountId", {accountId})
+        .where("account_id = :accountId", {accountId})
         .getOne();
     },
     findAll(): Promise<User[]> {
