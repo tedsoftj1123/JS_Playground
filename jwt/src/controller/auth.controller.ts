@@ -9,7 +9,7 @@ export const recieveToken: BusinessLogic = async (req: Request, res: Response, n
      
      const token = authService.recieveToken(accountId);
 
-     res.json(
+     return res.json(
           {
                "token" : token
           }
@@ -18,6 +18,7 @@ export const recieveToken: BusinessLogic = async (req: Request, res: Response, n
 
 export const whoami: BusinessLogic = async (req: Request, res: Response, next: NextFunction) => {
      const accountId = req.headers.authorization;
+     console.log(accountId)
 
-     res.json(accountId)
+     return res.json(accountId)
 }
