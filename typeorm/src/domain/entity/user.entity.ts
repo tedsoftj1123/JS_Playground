@@ -1,5 +1,4 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Post } from "./post.entity";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("user")
 export class User extends BaseEntity{
@@ -21,7 +20,4 @@ export class User extends BaseEntity{
 
      @Column({type: "integer"})
      age: number
-
-     @OneToMany(() => Post, (post) => post.user)
-     poasts: Post[]
 }

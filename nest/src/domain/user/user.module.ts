@@ -8,13 +8,6 @@ import { User } from './domain/user.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UserController],
-  providers: [
-    SignUpUseCase,
-    UserRepository,
-    {
-      provide: 'UserRepository',
-      useExisting: UserRepository,
-    },
-  ],
+  providers: [SignUpUseCase, UserRepository],
 })
 export class UserModule {}

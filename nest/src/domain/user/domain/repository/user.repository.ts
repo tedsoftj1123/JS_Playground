@@ -10,7 +10,7 @@ export class UserRepository {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async saveUser(user: User) {
+  public async saveUser(user: User) {
     await this.userRepository.save(user);
   }
 }
