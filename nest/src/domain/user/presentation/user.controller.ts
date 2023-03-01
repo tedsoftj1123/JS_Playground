@@ -7,7 +7,7 @@ export class UserController {
   constructor(private readonly signUpUseCase: SignUpUseCase) {}
 
   @Post('/signup')
-  signUp(@Body() request: SignUpRequest): string {
+  public signUp(@Body() request: SignUpRequest): Promise<string> {
     return this.signUpUseCase.execute(request);
   }
 }

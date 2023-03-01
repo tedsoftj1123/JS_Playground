@@ -1,13 +1,22 @@
 import { SignUpRequest } from '../presentation/dto/signup.request';
-import { Inject } from '@nestjs/common';
 import { UserRepository } from '../domain/repository/user.repository';
+import { User } from '../domain/user.entity';
+import {Inject} from "@nestjs/common";
 
 export class SignUpUseCase {
   constructor(
-    @Inject('UserRepository')
-    private readonly userRepository: UserRepository,
+    @Inject(UserRepository)
+    private userRepository: UserRepository,
   ) {}
-  execute(request: SignUpRequest): string {
+  async execute(request: SignUpRequest) {
+    const user = new User(
+      request.accountId,
+      request.name,
+      request.password,
+      request.age,
+    );
+    await this.userRepository.saveUser(user);
+
     return `welcome! ${request.accountId}`;
   }
 }
