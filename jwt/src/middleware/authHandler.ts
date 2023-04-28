@@ -2,13 +2,16 @@ import jwt from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 
 
-export const authHandler = () => (req: Request, res: Response, next: NextFunction) =>{
-     let token: string = req.headers.authorization;
-     if(!token) next(new Error("Not Logged in"));
-     if(!token.startsWith("Bearer ")) next(new Error("invalid token"));
+export const authHandler = () => async (req: Request, res: Response, next: NextFunction) =>{
+     const auth: string = req.headers.authorization;
+     console.log(auth);
+     if(!auth) next(new Error("Not Logged in"));
+     if(!auth.startsWith("Bearer ")) next(new Error("invalid token"));
 
-     token = token.split(" ")[1];
+     const token = auth.split(" ")[1];
 
-     jwt.verify(token, process.env.TOKEN_SECRET);
-     next()
+     const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+
+     const userId = decoded.sub;
+     next();
 }

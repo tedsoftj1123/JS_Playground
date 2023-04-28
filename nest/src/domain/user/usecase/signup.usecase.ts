@@ -1,7 +1,7 @@
 import { SignUpRequest } from '../presentation/dto/signup.request';
 import { UserRepository } from '../domain/repository/user.repository';
 import { User } from '../domain/user.entity';
-import {Inject} from "@nestjs/common";
+import { Inject } from '@nestjs/common';
 
 export class SignUpUseCase {
   constructor(
@@ -17,6 +17,6 @@ export class SignUpUseCase {
     );
     await this.userRepository.saveUser(user);
 
-    return `welcome! ${request.accountId}`;
+    return `welcome! ${user.accountId}`;
   }
 }
