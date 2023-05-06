@@ -1,29 +1,15 @@
-const express = require('express');
+import express from "express";
+import morgan from "morgan";
+import { userRouter } from "./router/user.router.js";
 
 const app = express();
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
+app.use(morgan('dev'))
 
-app.use((req, res, next) => {
-    console.log(req.method + " " + req.url);
-    next();
-});
+app.set('jwt_secret', process.env.JWT_SECRET);
 
-app.get('/', (_req, res) => {
-    res.send('Hello World');
-});
-
-app.get('/path/value/:data', (req, res) => {
-    res.send(req.params.data);
-});
-
-app.delete('/error', (req, res) => {
-    throw new Error('에러 났어요');
-});
-
-
-app.use((error, req, res, next) => {
-    console.log(error);
-    res.status(500).send('Internal server Error');
-});
+app.use('/', userRouter());
 
 app.listen(3000, () => {
     console.log('listening on 3000')

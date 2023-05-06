@@ -11,4 +11,3 @@ const hello = new Promise((resolve, reject) => {
 });
 
 printWord("what");
-)
