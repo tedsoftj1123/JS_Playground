@@ -1,10 +1,11 @@
-import { Router } from "express";
+const router = require("express").Router();
 
-const userRouter = () => {
-     const app = Router();
-     app.get('/auth', (req, res) => {
-          console.log('hello');
-     });
-}
+router.get('/', (req, res) => {
+     res.json(
+          {
+               "content": "hello world!"
+          }
+     ).send();
+});
 
-module.exports = userRouter;
+module.exports = router;
