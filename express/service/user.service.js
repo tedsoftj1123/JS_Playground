@@ -5,5 +5,6 @@ export class UserService{
 
      getUsersById(id) {
           console.log(id);
+          throw new Error();
      }
 }

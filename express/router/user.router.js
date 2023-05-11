@@ -18,7 +18,17 @@ export const userRouter = (app) => {
           });
 
      router.get('/:userId', (req, res, next) => {
-          userService.getUsersById(req.params.userId);
+          try {
+               userService.getUsersById(req.params.userId);    
+          } catch(e) {
+               console.error(e);
+               res.status(500)
+               .send(
+                    {
+                         "message": e.message
+                    }
+               )
+          }
           res.send();
      });
 
