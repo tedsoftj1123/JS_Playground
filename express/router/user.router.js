@@ -1,23 +1,29 @@
-const router = require("express").Router();
+import { UserService } from '../service/user.service.js'
+import { Router } from 'express';
 
-router.get('/', (req, res) => {
-     console.log("유저 리스트 조회");
-     res.send();
-});
+const router = Router();
+export const userRouter = (app) => {
+     const userService = new UserService();
 
-router.get('/:userId', (req, res) => {
-     console.log("id로 user 조회: ", req.params.userId);
-     res.send();
-});
+     app.use('/users', router);
+     
+     router.route('/')
+          .get((req, res) => {
+               console.log("유저 리스트 조회");
+               res.send();
+          })
+          .delete((req, res) => {
+               console.log("id로 user 삭제: ", req.params.userId);
+               res.send();
+          });
 
-router.post('/', (req, res) => {
-     console.log("회원가입");
-     res.send();
-});
+     router.get('/:userId', (req, res, next) => {
+          userService.getUsersById(req.params.userId);
+          res.send();
+     });
 
-router.delete('/:userId', (req, res) => {
-     console.log("id로 user 삭제: ", req.params.userId);
-     res.send();
-});
-
-module.exports = router;
+     router.post('/', (req, res) => {
+          console.log("회원가입");
+          res.send();
+     });
+}

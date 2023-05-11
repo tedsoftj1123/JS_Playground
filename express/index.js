@@ -1,15 +1,13 @@
-const express = require("express");
-const morgan = require("morgan");
- 
+import express from "express";
+import morgan from "morgan";
+import { mainRouter } from "./router/router.js";
+
 const app = express();
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.set('jwt_secret', process.env.JWT_SECRET);
-
-const userRouter = require('./router/user.router');
-app.use('/users', userRouter);
+app.use("/", mainRouter());
 
 app.use((req, res, next) => {
     res.json(
