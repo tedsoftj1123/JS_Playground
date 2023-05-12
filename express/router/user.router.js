@@ -9,7 +9,7 @@ export const userRouter = (app) => {
      
      router.route('/')
           .get((req, res) => {
-               console.log("유저 리스트 조회");
+               userService.getUsers()
                res.send();
           })
           .delete((req, res) => {
@@ -21,15 +21,8 @@ export const userRouter = (app) => {
           try {
                userService.getUsersById(req.params.userId);    
           } catch(e) {
-               console.error(e);
-               res.status(500)
-               .send(
-                    {
-                         "message": e.message
-                    }
-               )
+               next(e);
           }
-          res.send();
      });
 
      router.post('/', (req, res) => {

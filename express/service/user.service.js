@@ -5,6 +5,6 @@ export class UserService{
 
      getUsersById(id) {
           console.log(id);
-          throw new Error();
+          throw new Error("의도한 에러");
      }
 }
