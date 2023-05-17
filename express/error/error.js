@@ -17,3 +17,10 @@ export class BadRequestException extends CustomError {
           this.statusCode = 400;
      }
 }
+
+export class ConflictException extends CustomError {
+     constructor(msg) {
+          super(msg);
+          this.statusCode = 409;
+     }
+}
