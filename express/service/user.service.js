@@ -5,9 +5,12 @@ export class UserService{
           return await User.findAll();
      }
 
-     getUsersById(id) {
-          console.log(id);
-          throw new Error("의도한 에러");
+     async getUserById(id) {
+          return await User.findAll({
+               where: {
+                    id
+               }
+          });
      }
 
      async signup(accountId, password, name) {

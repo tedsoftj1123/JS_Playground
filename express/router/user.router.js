@@ -1,4 +1,4 @@
-import { getUsers, signup } from '../controller/user.controller.js';
+import { getUesrById, getUsers, signup } from '../controller/user.controller.js';
 import { errorHandler } from '../middleware/error.handler.js';
 import { UserService } from '../service/user.service.js'
 import { Router } from 'express';
@@ -16,13 +16,7 @@ export const userRouter = (app) => {
                res.send();
           });
 
-     router.get('/:userId', (req, res, next) => {
-          try {
-               userService.getUsersById(req.params.userId);    
-          } catch(e) {
-               next(e);
-          }
-     });
+     router.get('/:userId', errorHandler(getUesrById));
 
      router.post('/', errorHandler(signup));
 }
