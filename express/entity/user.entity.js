@@ -1,6 +1,7 @@
-import { DataTypes, Model, Sequelize } from "sequelize"
+import { DataTypes, Model } from "sequelize"
+import { sequelize } from "../config/sequelize.config.js";
 
-export class User extends Sequelize.Model {
+export class User extends Model {
      static initiate(sequelize) {
          User.init({
                id: {
@@ -8,23 +9,23 @@ export class User extends Sequelize.Model {
                     primaryKey : true,
                     autoIncrement : true
                },
-             accountId: {
-                 type : Sequelize.STRING(20),
-                 allowNull : false,
-                 unique : true
-             },
-             password : {
-                 type : Sequelize.STRING(40),
-                 allowNull : false
-             },
-             name : {
-                 type : Sequelize.STRING(10),
-                 allowNull : false
-             },
-             createdAt : {
-                 type : Sequelize.TIME,
-                 allowNull : false,
-                 defaultValue : Sequelize.NOW
+               accountId: {
+                    type : DataTypes.STRING(20),
+                    allowNull : false,
+                    unique : true
+               },
+               password : {
+                    type : DataTypes.STRING(40),
+                    allowNull : false
+               },
+               name : {
+                    type : DataTypes.STRING(10),
+                    allowNull : false
+               },
+               createdAt : {
+                    type : DataTypes.TIME,
+                    allowNull : false,
+                    defaultValue : DataTypes.NOW
              }
          }, {
              sequelize,
@@ -36,3 +37,5 @@ export class User extends Sequelize.Model {
          });
      }
  }
+
+ User.initiate(sequelize);

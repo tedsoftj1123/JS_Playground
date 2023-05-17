@@ -1,6 +1,8 @@
+import { User } from "../entity/user.entity.js";
+
 export class UserService{
-     getUsers() {
-          console.log("getUsers");
+     async getUsers() {
+          return await User.findAll();
      }
 
      getUsersById(id) {
