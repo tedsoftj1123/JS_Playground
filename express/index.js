@@ -26,12 +26,11 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     console.error(err);
-    if(!(err instanceof CustomError)) {
-        err.status = 500;
-    }
-    res.status(err.statusCode).json(
+    const httpCode = (err instanceof CustomError) ? err.statusCode : 500;
+    const errMessage = (err instanceof CustomError) ? err.message : 'Internal Server Error';
+    res.status(httpCode).json(
         {
-            "message": err.message,
+            "message": errMessage,
             "timeStamp": new Date()
         }
     )

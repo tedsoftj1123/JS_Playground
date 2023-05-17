@@ -1,4 +1,4 @@
-import { getUsers } from '../controller/user.controller.js';
+import { getUsers, signup } from '../controller/user.controller.js';
 import { errorHandler } from '../middleware/error.handler.js';
 import { UserService } from '../service/user.service.js'
 import { Router } from 'express';
@@ -24,8 +24,5 @@ export const userRouter = (app) => {
           }
      });
 
-     router.post('/', (req, res) => {
-          console.log("회원가입");
-          res.send();
-     });
+     router.post('/', errorHandler(signup));
 }
