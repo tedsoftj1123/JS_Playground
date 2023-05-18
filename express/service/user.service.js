@@ -24,4 +24,8 @@ export class UserService{
               name
           });
      }
+
+     async deleteUserById(id) {
+          await User.destroy({where: {id}});
+     }
 }

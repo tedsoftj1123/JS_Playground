@@ -17,3 +17,11 @@ export const getUesrById = async (req, res, next) => {
      const user = await userService.getUserById(req.params.userId);
      res.status(200).json(user);
 }
+
+export const deleteUserById = async (req, res, next) => {
+     await userService.deleteUserById(req.params.userId);
+
+     res.status(204).json({
+          "message": "success"
+     });
+}
