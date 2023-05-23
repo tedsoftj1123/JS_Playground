@@ -31,3 +31,7 @@ export const login = async (req, res, next) => {
           token
      });
 }
+
+export const myPage = async (req, res, next) => {
+     res.json(await userService.myPage(req.currentUserId));
+}

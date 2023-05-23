@@ -46,4 +46,8 @@ export class UserService{
 
           return provideToken(accountId, 'access');
      }
+
+     async myPage(currentUserId) {
+          return await User.findOne({where: {accountId: currentUserId}});
+     }
 }
