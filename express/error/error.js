@@ -24,3 +24,10 @@ export class ConflictException extends CustomError {
           this.statusCode = 409;
      }
 }
+
+export class UnauthorizedException extends CustomError {
+     constructor(msg) {
+          super(msg);
+          this.statusCode = 401;
+     }
+}

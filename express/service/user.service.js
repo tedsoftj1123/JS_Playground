@@ -1,5 +1,6 @@
 import { User } from "../entity/user.entity.js";
-import { ConflictException } from "../error/error.js";
+import { ConflictException, NotFoundException, UnauthorizedException } from "../error/error.js";
+import { provideToken } from "../util/jwt.util.js";
 
 export class UserService{
      async getUsers() {
@@ -7,25 +8,42 @@ export class UserService{
      }
 
      async getUserById(id) {
-          return await User.findAll({
-               where: {
-                    id
-               }
-          });
+          const user = await User.findByPk(id);
+
+          if(!user) {
+               throw new NotFoundException('user not found');
+          }
+
+          return user;
      }
 
      async signup(accountId, password, name) {
-          if(User.findOne({where:{accountId}}) !== undefined) {
-               throw new ConflictException("user already registered");
+          const user = await User.findOne({
+               where: {accountId}
+          });
+          if(user) {
+               throw new ConflictException('user alrady exists');
           }
+
           await User.create({
               accountId,
               password,
               name
           });
+
+          return provideToken(accountId, 'access');
      }
 
      async deleteUserById(id) {
           await User.destroy({where: {id}});
+     }
+
+     async login(accountId, password) {
+          const user = await User.findOne({where: {accountId}});
+          if(user.password !== password) {
+               throw new UnauthorizedException('invalid passsword');
+          }
+
+          return provideToken(accountId, 'access');
      }
 }

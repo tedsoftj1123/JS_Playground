@@ -4,13 +4,11 @@ const userService = new UserService();
 
 export const getUsers = async (req, res, next) => {
      const users = await userService.getUsers();
-
-     res.status(200).json(users);
 }
 
 export const signup = async (req, res, next) => {
-     await userService.signup(req.body.accountId, req.body.password, req.body.name);
-     res.status(201).send();
+     const token = await userService.signup(req.body.accountId, req.body.password, req.body.name);
+     res.status(201).send({token});
 }
 
 export const getUesrById = async (req, res, next) => {
@@ -23,5 +21,13 @@ export const deleteUserById = async (req, res, next) => {
 
      res.status(204).json({
           "message": "success"
+     });
+}
+
+export const login = async (req, res, next) => {
+     const token = await userService.login(req.body.accountId, req.body.password);
+
+     res.status(201).json({
+          token
      });
 }
