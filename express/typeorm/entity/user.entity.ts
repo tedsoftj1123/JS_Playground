@@ -6,10 +6,13 @@ export class User {
      @PrimaryGeneratedColumn()
      id: number
 
-     @Column({unique: true, nullable: false})
+     @Column('varchar', {unique: true, nullable: false})
      accountId: string
 
-     @Column()
+     @Column('tinyint')
      age: number
+
+     @Column('varchar')
+     name: string
 
 }
